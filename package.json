@@ -1,9 +1,9 @@
 {
-  "name": "project-todo",
+  "name": "tasktracker",
   "version": "0.0.1",
   "main": "index.js",
   "bin": {
-    "project-todo": "./index.js"
+    "tasktracker": "./index.js"
   },
   "type": "module",
   "scripts": {
@@ -16,6 +16,7 @@
   "dependencies": {
     "@inquirer/prompts": "^5.0.4",
     "chalk-animation": "^2.0.3",
+    "cli-table3": "^0.6.5",
     "commander": "^12.1.0",
     "figlet": "^1.7.0",
     "gradient-string": "^2.0.2"
