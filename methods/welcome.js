@@ -12,7 +12,6 @@ const welcomeScreen = (program) => {
     const table = new Table({
         head: [chalk.blueBright('Name'), chalk.blueBright('value')],
     });
-
     table.push(
         { 'Name': program.name() },
         { 'Description': program.description() }

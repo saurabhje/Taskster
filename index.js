@@ -3,8 +3,9 @@
 import { program } from "commander";
 import chalk from "chalk";
 import { input } from "@inquirer/prompts";
+import { select } from '@inquirer/prompts';
 import { welcomeScreen, displayHelpTable } from "./methods/welcome.js";
-import { addRandom, showRandom } from "./methods/task.js";
+import { addTask, clearFile, readTasks, deleteTask } from "./methods/task.js";
 
 program.helpInformation = function () {
 	return ''
@@ -16,43 +17,67 @@ program
 	.usage('[command] [options]')
 	.description('Task tracker for your project');
 
-program
-	.option('-r, --red', 'shows red color')
-	.option('-b, --blue', 'shows blue color')
-
-const ops = program.opts()
-program
-	.command('add <task>')
-	.description('Asks for your task and then shows')
-	.action(async (task) => {
-		const answer = await input({ message: 'What is your name big boy?' });
-		const red = ops.red;
-		const blue = ops.blue
-		if (red) {
-			console.log(chalk.red(answer));
-		} else if (blue) {
-			console.log(chalk.cyanBright(answer));
-		} else {
-			console.log(chalk.bgWhiteBright.black(answer));
-		}
-		console.log(`Task: ${task}`);
-	})
 
 program
-	.command('rand')
-	.description('Adds random things to the file')
+	.command('add')
+	.description('Add a new task')
+	.alias('a')
 	.action(async () => {
-		const ans1 = await input({ message: 'what do you want to add' });
-		addRandom(ans1)
+		const ans1 = await input({ message: 'Task title?' });
+		const priority = await select({
+			message: 'Select the task priority',
+			choices: [
+				{
+					name: 'High priority',
+					value: 'high',
+					description: 'Urgent and important, requires immediate attention.'
+				},
+				{
+					name: 'Medium priority',
+					value: 'medium',
+					description: 'Important task, but don\'t need immediate attention.'
+				},
+				{
+					name: 'Low priority',
+					value: 'low',
+					description: 'tasks that can be neglected.'
+				}
+			]
+		})
+		console.log(priority)
+		addTask(ans1, priority)
 	})
 
 program
 	.command('list')
-	.description('List all the file content')
+	.alias('lt')
+	.description('List all the tasks')
 	.action(() => {
-		showRandom()
+		const tasks = readTasks()
+		console.log(tasks)
 	})
-	
+
+program
+	.command('delete <id>')
+	.alias('d')
+	.description('Remove the task(s)')
+	.option('-a, --all', 'Delete all tasks')
+	.action((id, cmdargs) => {
+		if (cmdargs.all) {
+			clearFile();
+			console.log('Cleared all the tasks');
+		} else {
+			if (id) {
+				const tasks = readTasks()
+				
+				deleteTask(id);
+			} else {
+				console.log('No option provided. Use --all to clear all tasks or provide a task ID to delete a specific task.');
+			}
+		}
+	});
+
+
 program
 	.command('help')
 	.description('Displays help information')
