@@ -23,6 +23,7 @@ function readTasks() {
         return data ? JSON.parse(data) : [];
     } catch (error) {
         console.log('Error reading the tasks:', error)
+        return [];
     }
 }
 
@@ -50,10 +51,39 @@ function addTask(task, priority) {
 
 }
 
+function editTask(id, { editType, newTitle, newPrior }) {
+    const tasks = readTasks();
+    const taskIndex = tasks.findIndex(task => task.id === id);
+
+    if (taskIndex === -1) {
+        console.log('No such task found');
+        return;
+    }
+
+    let updatedTask = tasks[taskIndex];
+
+    if (editType === 'title') {
+        updatedTask.title = newTitle;
+    } else if (editType === 'priority') {
+        updatedTask.priority = newPrior;
+    } else {
+        console.log('Invalid edit type');
+        return;
+    }
+
+    tasks[taskIndex] = updatedTask;
+
+    try {
+        fs.writeFileSync(filepath, JSON.stringify(tasks, null, 2));
+        console.log('Task updated');
+    } catch (error) {
+        console.log('Error updating task:', error);
+    }
+}
+
 function deleteTask(id) {
     const tasks = readTasks();
     const updatedTasks = tasks.filter(task => task.id !== id);
-
     try {
         fs.writeFileSync(filepath, JSON.stringify(updatedTasks, null, 2));
         console.log(`Task with ID ${id} deleted successfully!`);
@@ -63,4 +93,4 @@ function deleteTask(id) {
 }
 
 
-export { addTask, readTasks, clearFile, deleteTask };
+export { addTask, readTasks, clearFile, deleteTask, editTask };

@@ -1,24 +1,22 @@
-import gradient from "gradient-string";
-import figlet from "figlet";
 import chalk from "chalk";
 import Table from 'cli-table3';
+import boxen from "boxen";
 
 // Function to display welcome screen
 const welcomeScreen = (program) => {
-    console.log();
-    console.log(gradient.cristal(figlet.textSync('Task Tracker', { horizontalLayout: 'full' })));
-    
-    //CLI info table
-    const table = new Table({
-        head: [chalk.blueBright('Name'), chalk.blueBright('value')],
-    });
-    table.push(
-        { 'Name': program.name() },
-        { 'Description': program.description() }
-        , { 'version': program.version() }
-    );
-    console.log(table.toString())
+    const message = `${chalk.bold.magentaBright(program.name())}\n${program.description()}\n ${program.version()}`
+    const options = {
+        padding: 1,
+        margin: 1,
+        align: 'center',
+        borderColor: '#5d8390',
+        title : 'TaskTracker',
+        titleAlignment: 'center'
+    }
+    const box = boxen(message, options);
+    console.log(box);
 }
+
 
 // Function to display help table
 const displayHelpTable = (program) => {
@@ -42,7 +40,6 @@ const displayHelpTable = (program) => {
             [chalk.greenBright(command.name() + '' + command.usage())]: command.description()
         });
     });
-
     console.log(helptable.toString());
 }
 
