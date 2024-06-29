@@ -1,9 +1,9 @@
 {
-  "name": "tasktracker",
+  "name": "taskster",
   "version": "0.0.1",
   "main": "index.js",
   "bin": {
-    "tasktracker": "./index.js"
+    "taskster": "./index.js"
   },
   "type": "module",
   "scripts": {

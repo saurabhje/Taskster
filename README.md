@@ -86,13 +86,16 @@ npx tasktracker l
 
 ### Adding a task
 ```npx tracker a```
+```
 ? Task title? This is a random task title
 ? Select the task priority Medium priority
 medium
 Content appended successfully!:  This is a random task title priority:  medium
+```
 
 ### Listing all the tasks
 ```npx tasktracker l```
+```
 ┌─────┬──────────────────────────────────────────┬──────────┬─────────────┬─────────────────┐
 │ ID  │ Task                                     │ Priority │ Time Added  │ Date Added      │
 ├─────┼──────────────────────────────────────────┼──────────┼─────────────┼─────────────────┤
@@ -100,13 +103,15 @@ Content appended successfully!:  This is a random task title priority:  medium
 ├─────┼──────────────────────────────────────────┼──────────┼─────────────┼─────────────────┤
 │ N6V │ This is the new title of the second task │ medium   │ 12:19:55 PM │ Sat Jun 29 2024 │
 └─────┴──────────────────────────────────────────┴──────────┴─────────────┴─────────────────┘
+```
 
 ### Editing a task
 ```npx tasktracker e N6V```
+```
 ? What do you want to edit title
 ? New Title of the task This is the new title of the second task
 Task updated
-
+```
 # Contribute
 1. Git fork and clone this repo
 2. Make a PR
