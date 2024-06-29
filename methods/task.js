@@ -1,6 +1,9 @@
 import fs from 'fs';
 import path from 'path';
-import os from 'os'
+import os from 'os';
+import Table from 'cli-table3';
+import chalk from "chalk";
+
 
 const appDir = path.join(os.homedir(), '.tasktracker');
 const filepath = path.join(appDir, 'data.json');
@@ -32,11 +35,11 @@ function clearFile() {
 }
 
 
-function addTask(task, priority) {
+function addTask(title, priority) {
     const tasks = readTasks()
     const newTask = {
         "id": generateID(),
-        "task": task,
+        "title": title,
         "priority": priority,
         "dateAdded": new Date().toDateString(),
         "timeAdded": new Date().toLocaleTimeString()
@@ -47,7 +50,7 @@ function addTask(task, priority) {
     } catch (error) {
         console.log('Error Adding Task : ', error);
     }
-    console.log('Content appended successfully!: ', task);
+    console.log('Content appended successfully!: ', title, 'priority: ', priority);
 
 }
 
@@ -92,5 +95,46 @@ function deleteTask(id) {
     }
 }
 
-
-export { addTask, readTasks, clearFile, deleteTask, editTask };
+function listAlltasks(){
+    const tasks = readTasks()
+    if(tasks.length == 0 ){
+        console.log(chalk.bgMagentaBright('There are no tasks to display :('))
+        return;
+    }
+    const taskTable = new Table({
+        head: [
+            chalk.blue('ID'),
+            chalk.blue('Task'),
+            chalk.blue('Priority'),
+            chalk.blue('Time Added'),
+            chalk.blue('Date Added')
+          ],
+    })
+    tasks.forEach(element => {
+        let formattedTitle =  element.title;
+        if (element.priority === 'high'){
+            formattedTitle = chalk.redBright(element.title)
+          } else if(element.priority === 'medium'){
+            formattedTitle =  chalk.yellowBright(element.title)
+          }else{
+            formattedTitle = chalk.greenBright(element.title)
+          }
+        taskTable.push([
+          element.id,
+          formattedTitle,
+          element.priority,
+          element.timeAdded,
+          element.dateAdded,
+        ]);
+      });
+      
+    console.log(taskTable.toString())
+}
+function userPromptError(message){
+    if (message.includes('User force closed the prompt')) {
+        console.log(chalk.yellow(`Prompt was interrupted by the user.\n Exiting the program...`));			
+    }else{
+        console.log(chalk.redBright(`An unexpected error encountered\n Exiting the program...`, message))
+    }
+}
+export { addTask, readTasks, clearFile, deleteTask, editTask, listAlltasks, userPromptError };

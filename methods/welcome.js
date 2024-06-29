@@ -4,7 +4,7 @@ import boxen from "boxen";
 
 // Function to display welcome screen
 const welcomeScreen = (program) => {
-    const message = `${chalk.bold.magentaBright(program.name())}\n${program.description()}\n ${program.version()}`
+    const message = `${chalk.bold.bgMagentaBright(program.name())}\n${program.description()}\n ${program.version()}`
     const options = {
         padding: 1,
         margin: 1,
