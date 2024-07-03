@@ -5,7 +5,7 @@ import Table from 'cli-table3';
 import chalk from "chalk";
 
 
-const appDir = path.join(os.homedir(), '.tasktracker');
+const appDir = path.join(process.cwd(), '.taskster');
 const filepath = path.join(appDir, 'data.json');
 
 function generateID() {

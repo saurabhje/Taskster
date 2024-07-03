@@ -1,8 +1,8 @@
-# TaskTracker
+# Taskster
 
 A command-line interface (CLI) tool for efficient task prioritization and management.
 
-![welcome screen of TaskTracker](image.png)
+![welcome screen of Taskster](image.png)
 
 ## Table of contents
 - [Introduction](#Introduction)
@@ -14,13 +14,13 @@ A command-line interface (CLI) tool for efficient task prioritization and manage
 
 # Introduction
 
-TaskTracker is a task prioritization CLI tool that ensures you work on the right tasks at the right time. It helps you organize your project tasks and provides a clear path to tackle them efficiently. With its intuitive command-line interface, you can quickly prioritize and manage your project workload.
+Taskster is a task prioritization CLI tool that ensures you work on the right tasks at the right time. It helps you organize your project tasks and provides a clear path to tackle them efficiently. With its intuitive command-line interface, you can quickly prioritize and manage your project workload.
 
 
 # Installation
 
 ```
-    npm install tasktracker
+    npm install taskster
 ```
 
 # Usage
@@ -28,11 +28,11 @@ TaskTracker is a task prioritization CLI tool that ensures you work on the right
 
 Add command can be used to add a new task in the ToDo list.
 ```
- npx tasktracker add
+ npx taskster add
 ```
 or 
 ```
-npx tasktracker a
+npx taskster a
 ```
 
 You'll have to provide the following details
@@ -51,11 +51,11 @@ Edit command is used to edit the title or priority of any task by providing its 
 
 It can be invoked using this - 
 ```
-    npx tasktracker edit <id>
+    npx taskster edit <id>
 ```
 or 
 ```
-npx tasktracker e <id>
+npx taskster e <id>
 ```
 
 ## Delete 
@@ -63,11 +63,11 @@ npx tasktracker e <id>
 Delete command is used to delete any specific task or all the tasks
 
 ```
-npx tasktracker delete
+npx taskster delete
 ```
 or 
 ```
-npx tasktracker d
+npx taskster d
 ```
 
 ## List
@@ -75,17 +75,17 @@ npx tasktracker d
 It is used to list all the added tasks along with additional information
 
 ```
-npx tasktracker list
+npx taskster list
 ```
 or
 ```
-npx tasktracker l
+npx taskster l
 ```
 
 # Example
 
 ### Adding a task
-```npx tracker a```
+```npx taskster a```
 ```
 ? Task title? This is a random task title
 ? Select the task priority Medium priority
@@ -94,7 +94,7 @@ Content appended successfully!:  This is a random task title priority:  medium
 ```
 
 ### Listing all the tasks
-```npx tasktracker l```
+```npx taskster l```
 ```
 ┌─────┬──────────────────────────────────────────┬──────────┬─────────────┬─────────────────┐
 │ ID  │ Task                                     │ Priority │ Time Added  │ Date Added      │
@@ -106,7 +106,7 @@ Content appended successfully!:  This is a random task title priority:  medium
 ```
 
 ### Editing a task
-```npx tasktracker e N6V```
+```npx taskster e N6V```
 ```
 ? What do you want to edit title
 ? New Title of the task This is the new title of the second task

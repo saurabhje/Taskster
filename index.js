@@ -3,7 +3,22 @@ import { program } from "commander";
 import { confirm, input, select} from "@inquirer/prompts";
 import { welcomeScreen, displayHelpTable } from "./methods/welcome.js";
 import { addTask, clearFile, readTasks, deleteTask, editTask, listAlltasks, userPromptError } from "./methods/task.js";
+import fs from 'fs';
+import path from 'path';
 
+// This adds a tasktracker directory in the project's dir
+
+const appDir = path.join(process.cwd(), '.taskster');
+const filepath = path.join(appDir, 'data.json');
+
+if(!fs.existsSync(appDir)){
+    fs.mkdirSync(appDir)
+}
+if (!fs.existsSync(filepath)) {
+    fs.writeFileSync(filepath, JSON.stringify([], { spaces: 2 }), 'utf8');
+  }
+
+  
 program.helpInformation = function () {
 	return ''
 };
